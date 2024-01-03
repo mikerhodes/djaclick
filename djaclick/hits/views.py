@@ -14,14 +14,13 @@ def timeseries(request):
     client = clickhouse_connect.get_client(
         host="localhost", port=8123)
 
-    QUERY = """
-    SELECT
-        toStartOfInterval(ts, toIntervalMinute(1)) AS h,
+    QUERY = """SELECT
+        toStartOfInterval(ts, toIntervalSecond(5)) AS h,
         count(status)
     FROM hits
     GROUP BY h
-    ORDER BY h ASC
-    LIMIT 100
+    ORDER BY h DESC
+    LIMIT 20
     """
 
     result = client.query(QUERY)
