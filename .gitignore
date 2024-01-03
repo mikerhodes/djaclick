@@ -2,3 +2,4 @@ venv
 /djaclick/theme
 __pycache__
 db.sqlite3
+.DS_Store

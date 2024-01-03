@@ -1,9 +1,33 @@
 # djaclick
 
-An example of using ClickHouse timeseries data in a Django application.
+An example of using [ClickHouse] timeseries data in a [Django] application.
 
-Because I didn't know Django and I thought it'd be nice to use it with
-ClickHouse and get a graph.
+Because I didn't know Django and I thought it'd be nice to learn to use it. I
+liked the idea of pulling data from ClickHouse and graphing it because I've
+enjoyed playing with ClickHouse and metrics in [other settings recently].
+
+The repository contains a few things:
+
+1. A Go application to create dummy data, and a [Vector] configuration file that
+   will accept that data on `stdin` and push it to a local ClickHouse.
+2. A Django application using `chart.js` and `tailwindcss` that displays a 5s
+   aggregation of the count of the data records in ClickHouse.
+
+It's designed to show several things acting in concert: data generation, ingest,
+ClickHouse in action (very shallowly) and Django (also shallowly).
+
+![](images/demo.png)
+
+To get it running we must:
+
+- Install ClickHouse and create the expected `hits` table structure.
+- Install Vector, and run the Go app to push data into ClickHouse.
+- Set up the Django application and run it.
+
+[Django]: https://www.djangoproject.com/
+[ClickHouse]: https://clickhouse.com/
+[Vector]: https://vector.dev/
+[other settings recently]: https://dx13.co.uk/articles/2023/08/29/journal/
 
 ## Clickhouse
 
