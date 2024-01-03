@@ -1,0 +1,27 @@
+{% load static %}
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hits Demo</title>
+  {% tailwind_css %}
+  <link rel="stylesheet" href="{% static 'hits/style.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+</head>
+<body>
+
+<div class="mx-auto w-9/12 my-10">
+
+<h1 class="">Hits Demo</h1>
+
+<p class="font-sans">No hits are available.</p>
+
+<div style="width: 800px;"><canvas id="acquisitions"></canvas></div>
+  <script type="text/javascript" src="{% static 'hits/main.js' %}"></script>
+
+</div>
+
+</body>

@@ -1,0 +1,10 @@
+[sources.my_source_id]
+type = "stdin"
+[sources.my_source_id.decoding]
+codec = "json"
+
+[sinks.my_sink_id]
+type = "clickhouse"
+inputs = [ "my_source_id" ]
+endpoint = "http://localhost:8123"
+table = "hits"
