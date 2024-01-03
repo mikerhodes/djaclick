@@ -10,14 +10,22 @@ def index(request):
     }
     return render(request, "hits/index.html", context)
 
-
 def timeseries(request):
-    client = clickhouse_connect.get_client(host="localhost", port=8123)
+    client = clickhouse_connect.get_client(
+        host="localhost", port=8123)
 
-    QUERY = "SELECT toStartOfInterval(ts, INTERVAL 1 MINUTE) AS h, count(status) FROM hits GROUP BY h ORDER BY h ASC LIMIT 100"
+    QUERY = """
+    SELECT
+        toStartOfInterval(ts, toIntervalMinute(1)) AS h,
+        count(status)
+    FROM hits
+    GROUP BY h
+    ORDER BY h ASC
+    LIMIT 100
+    """
 
     result = client.query(QUERY)
 
-    return JsonResponse(
-        {"data": [{"ts": x[0], "count": x[1]} for x in result.result_rows]}
-    )
+    return JsonResponse({"data": [{"ts": x[0], "count": x[1]} for x in result.result_rows]})
+    
+   
