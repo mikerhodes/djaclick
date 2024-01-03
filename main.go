@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"time"
 )
 
@@ -29,9 +30,12 @@ func main() {
 	for {
 		select {
 		case <-ticker.C:
-			h := hit{TS: time.Now().Format("2006-01-02T15:04:05"), Status: "200", Method: "GET", Path: "/foo"}
-			data, _ := json.Marshal(h)
-			fmt.Println(string(data))
+			count := rand.Intn(50)
+			for i := 0; i < count; i++ {
+				h := hit{TS: time.Now().Format("2006-01-02T15:04:05"), Status: "200", Method: "GET", Path: "/foo"}
+				data, _ := json.Marshal(h)
+				fmt.Println(string(data))
+			}
 		}
 	}
 }
