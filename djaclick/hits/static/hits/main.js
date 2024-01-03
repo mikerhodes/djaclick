@@ -45,7 +45,7 @@ async function redrawChart() {
           },
           y: {
             min: 0,
-            suggestedMax: 500,
+            suggestedMax: 800,
           },
         },
       },
