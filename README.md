@@ -2,9 +2,11 @@
 
 An example of using [ClickHouse] timeseries data in a [Django] application.
 
-Because I didn't know Django and I thought it'd be nice to learn to use it. I
-liked the idea of pulling data from ClickHouse and graphing it because I've
-enjoyed playing with ClickHouse and metrics in [other settings recently].
+Why this? Because:
+
+- I didn't know Django and I thought it'd be nice to learn to use it.
+- I liked the idea of pulling data from ClickHouse and graphing it because I've
+  enjoyed playing with ClickHouse and metrics in [other settings recently].
 
 The repository contains a few things:
 
@@ -31,7 +33,8 @@ To get it running we must:
 
 ## Clickhouse
 
-- Install ClickHouse.
+- Install ClickHouse using
+  [these instructions](https://clickhouse.com/#getting_started).
 
 - Start the server:
 
@@ -59,7 +62,7 @@ To get it running we must:
   ORDER BY ts
   ```
 
-### Inserting ClickHouse data
+## Inserting ClickHouse data
 
 The data is generated via Go and inserted via Vector.
 
@@ -67,6 +70,11 @@ The data is generated via Go and inserted via Vector.
 brew tap vectordotdev/brew && brew install vector
 go build main.go | vector --config vector.toml
 ```
+
+(Why Go and Vector rather than Python writing direct? I find Go's `Ticker` great
+for these kinds of periodic-work apps. Vector allowed me to avoid going deep on
+Go by leveraging its built-in ClickHouse sink --- meaning my Go can be std lib
+only, so trivial to run like a script. That's valuable for this kind of hack.)
 
 ## The Django app
 
@@ -77,6 +85,13 @@ go build main.go | vector --config vector.toml
   asdf install nodejs 18.19.0
   ```
 
+- Clone:
+
+  ```
+  git clone git@github.com:mikerhodes/djaclick.git
+  cd djaclick
+  ```
+
 - After cloning this repository, in the repository:
 
   ```
@@ -85,9 +100,9 @@ go build main.go | vector --config vector.toml
   pip install -r requirements.txt
   ```
 
-- Pip installed a Django tailwind plugin. It needs initialising. The Django
-  application has all the relevant settings, just the init, install and start
-  need to be run, specifically:
+- One thing that the avove `pip` run installed was a Django tailwind plugin. It
+  needs initialising. The Django application has all the relevant settings, just
+  the `init`, `install` and `start` need to be run, specifically:
 
   ```
   cd djaclick
@@ -102,6 +117,8 @@ go build main.go | vector --config vector.toml
   [Installation — Django-Tailwind 2.0.0 documentation](https://django-tailwind.readthedocs.io/en/latest/installation.html).
   The app configuration should all be set up correctly already, so those steps
   are not needed.
+
+  (Tailwind feels a bit overkill frankly, but I only learned that later).
 
 - Try running the server:
 
