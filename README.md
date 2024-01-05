@@ -38,19 +38,19 @@ To get it running we must:
 
 - Start the server:
 
-  ```
+  ```sh
   ./clickhouse server
   ```
 
 - Start the client:
 
-  ```
+  ```sh
   ./clickhouse client
   ```
 
 - And create the table for the data:
 
-  ```
+  ```sql
   CREATE TABLE hits
   (
       `ts` DateTime,
@@ -80,21 +80,21 @@ only, so trivial to run like a script. That's valuable for this kind of hack.)
 
 - Install Python and Nodejs, the versions I used were:
 
-  ```
+  ```sh
   asdf install python 3.10.13
   asdf install nodejs 18.19.0
   ```
 
 - Clone:
 
-  ```
+  ```sh
   git clone git@github.com:mikerhodes/djaclick.git
   cd djaclick
   ```
 
 - After cloning this repository, in the repository:
 
-  ```
+  ```sh
   python -m venv venv
   source ./venv/bin/activate.fish
   pip install -r requirements.txt
@@ -104,25 +104,28 @@ only, so trivial to run like a script. That's valuable for this kind of hack.)
   needs initialising. The Django application has all the relevant settings, just
   the `init`, `install` and `start` need to be run, specifically:
 
-  ```
+  ```sh
   cd djaclick
   python manage.py tailwind init
   python manage.py tailwind install
+
+  # This will start a process, use a new terminal
   python manage.py tailwind start
   ```
 
-  Use `theme` as the name. It should set up the `theme` directory.
+  Use `theme` as the name in `init`. It should set up the `theme` directory.
 
   These are taken from
   [Installation — Django-Tailwind 2.0.0 documentation](https://django-tailwind.readthedocs.io/en/latest/installation.html).
   The app configuration should all be set up correctly already, so those steps
   are not needed.
 
-  (Tailwind feels a bit overkill frankly, but I only learned that later).
+  (Tailwind feels a bit overkill frankly, but it was useful to quickly get
+  columns going).
 
 - Try running the server:
 
-  ```
+  ```sh
   cd djaclick
   python manage.py runserver
   ```
