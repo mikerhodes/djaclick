@@ -6,7 +6,6 @@
 <head>
   <title>Hits Demo</title>
   {% tailwind_css %}
-  <link rel="stylesheet" href="{% static 'hits/style.css' %}">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
@@ -27,9 +26,17 @@
 
 </div>
 
-<div style="width: 100%;"><canvas id="acquisitions"></canvas></div>
-  <script type="text/javascript" src="{% static 'hits/main.js' %}"></script>
+<div class="columns-2">
+  <div class="py-10 w-full"><canvas class="chart" id="hits"></canvas></div>
+  <div class="py-10 w-full"><canvas class="chart" id="hits2" data-group-by="status"></canvas></div>
+</div>
+<div class="columns-2">
+  <div class="py-10 w-full"><canvas class="chart" id="hits3" data-group-by="method"></canvas></div>
+  <div class="py-10 w-full"><canvas class="chart" id="hits4" data-group-by="path"></canvas></div>
+</div>
 
 </div>
+
+<script type="text/javascript" src="{% static 'hits/main.js' %}"></script>
 
 </body>
